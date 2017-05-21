@@ -1,0 +1,30 @@
+This program demonstrates why you should not use gets() in your C programs.
+It does not check for buffer overruns and so may end up corrupting data or
+causing a segfault.
+
+To compile simply type 'make'. On BSD platforms, you may use 'gmake' instead.
+
+Here is sample output from running the program:
+
+| This program demonstrates why you should never use gets() as it is
+| unsafe. It does not check for buffer overruns.
+|
+| You will be asked to enter a string. Enter more than 5 characters to
+| see the effects of a buffer overrun.
+|
+| Before intput, value of integer is: 78
+| Enter a string: hello.
+| You entered: hello.
+| Now the value of the integer is: 30433296
+| If the value has changed then gets() overran its buffer.
+
+Notice that the value of the integer changed from 78 to 20433296. If you 
+study the code there is no statement that changes the integer from its
+original value. This happened because what I entered at the prompt was longer
+than the 5 chars assigned to the input buffer.
+
+You can type a much longer string to (hopefully) crash the program entirely.
+
+Fortunately, the gets() function is obsolete and you will get warnings during
+both the compilation and linker steps about its use. Unless, of course, your
+C compiler is too old.
